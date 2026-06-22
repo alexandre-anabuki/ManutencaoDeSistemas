@@ -1,0 +1,10 @@
+CREATE DATABASE atividadeManutencao;
+
+CREATE TABLE usuario(
+id_usuario INT NOT NULL AUTO_INCREMENT,
+nome VARCHAR(50),
+email VARCHAR(50),
+senha CHAR(64),
+ativo INT,
+PRIMARY KEY (id_usuario)
+);
