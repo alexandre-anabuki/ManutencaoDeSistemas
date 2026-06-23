@@ -46,6 +46,8 @@ function Login() {
             <label htmlFor="">Senha</label>
             <input type="password" name="senha" id="senha" value={form.senha} onChange={(e) => setForm({...form, senha: e.target.value})}/>
 
+            <a class="cursor-pointer" onClick={Cadastrar}>Criar conta</a>
+
             <a onClick={EsqueciSenha}>Esqueci minha senha</a>
 
             <button type="submit">Entrar</button>
