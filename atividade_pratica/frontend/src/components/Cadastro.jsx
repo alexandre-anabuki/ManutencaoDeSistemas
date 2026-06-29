@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { cadastroApi } from "../services/usuario"
+import { cadastroApi } from "../services/usuario.js"
 
 const Cadastro = () => {
 

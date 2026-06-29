@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { loginApi } from "../services/login"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link } from 'react-router-dom'
 
 
 function Login() {
@@ -46,11 +46,16 @@ function Login() {
             <label htmlFor="">Senha</label>
             <input type="password" name="senha" id="senha" value={form.senha} onChange={(e) => setForm({...form, senha: e.target.value})}/>
 
-            <a class="cursor-pointer" onClick={Cadastrar}>Criar conta</a>
-
-            <a onClick={EsqueciSenha}>Esqueci minha senha</a>
-
             <button type="submit">Entrar</button>
+
+            <br />
+
+            <small>Não tem conta? <Link to="/cadastro">Criar conta</Link></small>
+
+            <br />
+
+            <a href="#" onClick={EsqueciSenha}>Esqueci minha senha</a>
+
 
         </form>
     </div>

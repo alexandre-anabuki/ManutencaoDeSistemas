@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-import Cadastro from "./components/Cadastro"
-import Login from "./components/Login"
-import EsqueciSenha from "./components/EsqueciSenha"
+import Cadastro from "./components/Cadastro.jsx"
+import Login from "./components/Login.jsx"
+import EsqueciSenha from "./components/EsqueciSenha.jsx"
 
 function App() {
 
