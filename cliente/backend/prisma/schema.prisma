@@ -1,0 +1,89 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Usuario {
+  id        Int      @id @default(autoincrement())
+  nome      String
+  email     String   @unique
+  senha     String
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("usuario")
+}
+
+model Paciente {
+  id             Int              @id @default(autoincrement())
+  nome           String
+  telefone       String
+  email          String           @unique
+  dataNascimento String           @map("data_nascimento")
+  pesoAtual      Float            @map("peso_atual")
+  altura         Float
+  objetivo       String
+  observacao     String?
+  status         String           @default("ATIVO")
+  createdAt      DateTime         @default(now()) @map("created_at")
+
+  evolucoes Evolucao[]
+  consultas Consulta[]
+  planos    PlanoAlimentar[]
+
+  @@map("paciente")
+}
+
+model Evolucao {
+  id                      Int      @id @default(autoincrement())
+  pacienteId              Int      @map("paciente_id")
+  peso                    Float
+  percentualGordura       Float?   @map("percentual_gordura")
+  circunferenciaAbdominal Float?   @map("circunferencia_abdominal")
+  dataRegistro            DateTime @default(now()) @map("data_registro")
+  observacao              String?
+
+  paciente Paciente @relation(fields: [pacienteId], references: [id], onDelete: Cascade)
+
+  @@map("evolucao")
+}
+
+model Consulta {
+  id         Int      @id @default(autoincrement())
+  pacienteId Int      @map("paciente_id")
+  data       DateTime
+  status     String   @default("AGENDADA")
+  observacao String?
+
+  paciente Paciente @relation(fields: [pacienteId], references: [id], onDelete: Cascade)
+
+  @@map("consulta")
+}
+
+model PlanoAlimentar {
+  id              Int     @id @default(autoincrement())
+  pacienteId      Int     @map("paciente_id")
+  nomePlano       String  @map("nome_plano")
+  caloriasDiarias Int     @map("calorias_diarias")
+  objetivo        String
+  observacao      String?
+
+  paciente  Paciente   @relation(fields: [pacienteId], references: [id], onDelete: Cascade)
+  refeicoes Refeicao[]
+
+  @@map("plano_alimentar")
+}
+
+model Refeicao {
+  id        Int    @id @default(autoincrement())
+  planoId   Int    @map("plano_id")
+  tipo      String
+  descricao String
+
+  plano PlanoAlimentar @relation(fields: [planoId], references: [id], onDelete: Cascade)
+
+  @@map("refeicao")
+}
